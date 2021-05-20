@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RadiantProjects">
         <activity
-            android:name=".ui.activity.SplashScreenActivity"
+            android:name=".ui.activity.splashscreen.SplashScreenActivity"
             android:label=""
             android:theme="@style/Theme.RadiantProjects.NoActionBar">
             <intent-filter>
@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".ui.activity.home.HomeActivity"></activity>
 
         <meta-data
             android:name="preloaded_fonts"

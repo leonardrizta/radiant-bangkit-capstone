@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splash_screen"
-    tools:context=".ui.activity.SplashScreenActivity">
+    tools:context=".ui.activity.splashscreen.SplashScreenActivity">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_sc"
