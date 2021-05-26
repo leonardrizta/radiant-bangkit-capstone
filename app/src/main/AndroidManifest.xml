@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.c314.radiantprojects">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,15 +14,23 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RadiantProjects">
         <activity
+            android:name=".ui.activity.camera.CameraActivity"
+            android:theme="@style/Theme.RadiantProjects.NoActionBar"
+            />
+        <activity android:name=".ui.activity.profile.ProfileActivity" />
+        <activity
             android:name=".ui.activity.splashscreen.SplashScreenActivity"
-            android:label=""
             android:theme="@style/Theme.RadiantProjects.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.home.HomeActivity"></activity>
+        <activity
+            android:name=".ui.activity.home.HomeActivity"
+            android:label=""
+            android:theme="@style/Theme.RadiantProjects.NoActionBar" />
 
         <meta-data
             android:name="preloaded_fonts"

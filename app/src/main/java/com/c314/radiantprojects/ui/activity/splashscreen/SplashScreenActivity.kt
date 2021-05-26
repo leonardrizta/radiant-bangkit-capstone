@@ -25,5 +25,6 @@ class SplashScreenActivity : AppCompatActivity() {
             finish()
         }
 
+
     }
 }

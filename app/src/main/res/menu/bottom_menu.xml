@@ -6,10 +6,8 @@
         android:icon="@drawable/ic_home" />
 
     <item
-        android:id="@+id/nav_camera"
-        android:title="Camera"
-        android:icon="@drawable/ic_camera" />
-
+        android:id="@+id/placeholder"
+        android:title="" />
 
     <item
         android:id="@+id/nav_medicine"
