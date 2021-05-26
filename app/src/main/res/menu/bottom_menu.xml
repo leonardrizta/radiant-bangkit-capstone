@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_content"
+        android:title="Home"
+        android:icon="@drawable/ic_home" />
+
+    <item
+        android:id="@+id/nav_camera"
+        android:title="Camera"
+        android:icon="@drawable/ic_camera" />
+
+
+    <item
+        android:id="@+id/nav_medicine"
+        android:title="Medicine"
+        android:icon="@drawable/ic_medicine" />
+</menu>
