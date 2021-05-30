@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:4.2.0"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.3.8'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -24,4 +25,16 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+
+buildscript {
+    ext.koin_version= "3.0.2"
+    ext.coroutines_version="1.4.3"
+    ext.roomruntime_version="2.3.0"
+    ext.roomcompiler_version="2.3.0"
+    ext.lifecycle_version = "2.2.0"
+    ext.lifecycleviewmodel_version="2.3.1"
+    ext.lifecyclelivedata_version="2.3.1"
+    ext.lifecycleextensions_version="2.2.0"
 }
