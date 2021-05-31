@@ -16,11 +16,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.c314.radiantprojects.R
 import com.google.android.material.snackbar.Snackbar
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 
 
 private const val PERMISSIONS_REQUEST_CODE = 10

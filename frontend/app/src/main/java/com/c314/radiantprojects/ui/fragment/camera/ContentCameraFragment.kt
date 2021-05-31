@@ -372,6 +372,38 @@ class ContentCameraFragment : Fragment() {
                 }
             }
         }
+
+        // Setup for button used to switch cameras
+        controls.findViewById<ImageButton>(R.id.camera_switch_button).let {
+
+            // Disable the button until the camera is set up
+            it.isEnabled = false
+
+            // Listener for button used to switch cameras. Only called if the button is enabled
+            it.setOnClickListener {
+                lensFacing = if (CameraSelector.LENS_FACING_FRONT == lensFacing) {
+                    CameraSelector.LENS_FACING_BACK
+                } else {
+                    CameraSelector.LENS_FACING_FRONT
+                }
+                // Re-bind use cases to update selected camera
+                bindCameraUseCases()
+            }
+        }
+
+        // Listener for button used to view the most recent photo
+        controls.findViewById<ImageButton>(R.id.photo_view_button).setOnClickListener {
+            // Only navigate when the gallery has photos
+            if (true == outputDirectory.listFiles()?.isNotEmpty()) {
+                Navigation.findNavController(
+                    requireActivity(), R.id.fragment_container
+                ).navigate(ContentCameraFragmentDirections
+                    .actionContentCameraFragmentToGalleryFragment(outputDirectory.absolutePath))
+            }
+        }
+
+
+
     }
 
 
