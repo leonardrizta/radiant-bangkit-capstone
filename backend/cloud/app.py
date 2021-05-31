@@ -3,18 +3,44 @@ import tensorflow as tf
 from tensorflow import keras
 from skimage import transform, io
 import numpy as np
-  
+import os
+from keras.models import load_model
+
 app = Flask(__name__)
+
+UPLOAD_FOLDER = 'static/uploads/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'tiff', 'webp'}
+
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+def auc(y_true, y_pred):
+    auc = tf.metrics.auc(y_true, y_pred)[1]
+    keras.backend.get_session().run(tf.local_variables_initializer())
+    return auc
+
+@app.route('/')
+def main():
+    return 'This is Radiant Team API for predict skin disease'
 
 @app.route('/api/predict', methods=['POST'])
 def recognize_image():
-   if 'file' not in request.files:
+    if 'file' not in request.files:
         resp = jsonify({'message': 'No image in the request'})
         resp.status_code = 400
         return resp
     files = request.files.getlist('file')
+    filename = "predict_image.png"
+    for file in files:
+        if file and allowed_file(file.filename):
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            success = True
+        else:
+            errors["message"] = 'File type of {} is not allowed'.format(file.filename)
+    img_url = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-    img_url = files
+    # load model for prediction
+    model = load_model('dermnet.h5', custom_objects={'auc': auc})
     
     # prepare image for prediction
     img_array = io.imread(img_url, as_gray=False)
@@ -25,7 +51,7 @@ def recognize_image():
     prediction_array = model.predict(img_to_predict)
         
     # prepare api response
-    class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+    class_names = ['Acne and Rosacea Photos', 'Actinic Keratosis Basal Cell Carcinoma and other Malignant Lesions', 'Eczema Photos', 'Light Diseases and Disorders of Pigmentation', 'Nail Fungus and other Nail Disease', 'Vascular Tumors', 'Warts Molluscum and other Viral Infections']
     result = {
         "prediction" : class_names[np.argmax(prediction_array)],
         "confidence" : '{:2.0f}%'.format(100*np.max(prediction_array))
@@ -35,5 +61,4 @@ def recognize_image():
 
 
 if __name__ == '__main__':
-    model = keras.experimental.load_from_saved_model('fashion_mnist_classifier')
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0')
