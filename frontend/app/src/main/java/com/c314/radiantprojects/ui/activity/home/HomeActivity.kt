@@ -10,6 +10,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.c314.radiantprojects.R
 import com.c314.radiantprojects.databinding.ActivityHomeBinding
 import com.c314.radiantprojects.ui.activity.camera.CameraActivity
+import com.c314.radiantprojects.ui.fragment.home.ContentFragment
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -37,5 +38,6 @@ class HomeActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
     }
 }

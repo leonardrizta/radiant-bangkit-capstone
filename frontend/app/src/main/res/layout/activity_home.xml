@@ -37,6 +37,8 @@
         android:src="@drawable/ic_camera"
         app:layout_anchor="@id/bottomAppBar"
         android:contentDescription="todo"/>
+
+    
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 

@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.c314.radiantprojects">
+    package="com.c314.radiantprojects"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-feature android:name="android.hardware.camera.any" />
+    <!-- Enable instant app support -->
+    <dist:module dist:instant="true" />
+
+    <!-- Declare features -->
+    <uses-feature android:name="android.hardware.camera" />
+    <!-- Declare permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -13,11 +20,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.RadiantProjects">
+        android:theme="@style/Theme.RadiantProjects"
+        tools:ignore="AllowBackup">
         <activity
             android:name=".ui.activity.camera.CameraActivity"
             android:theme="@style/Theme.RadiantProjects.NoActionBar"
-            />
+            android:screenOrientation="fullUser"
+            android:rotationAnimation="seamless"
+            tools:targetApi="O">
+            <!-- Register as a system camera app -->
+            <intent-filter>
+                <action android:name="android.media.action.IMAGE_CAPTURE" />
+                <action android:name="android.media.action.STILL_IMAGE_CAMERA"/>
+                <action android:name="android.media.action.VIDEO_CAMERA" />
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <!-- Declare notch support -->
+            <meta-data android:name="android.notch_support" android:value="true"/>
+        </activity>
         <activity android:name=".ui.activity.profile.ProfileActivity" />
         <activity
             android:name=".ui.activity.splashscreen.SplashScreenActivity"

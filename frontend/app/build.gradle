@@ -5,6 +5,8 @@ plugins {
     id 'kotlin-kapt'
 }
 
+apply plugin: "androidx.navigation.safeargs"
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -61,15 +63,13 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleviewmodel_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecyclelivedata_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleextensions_version"
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
-
-    def camerax_version = "1.0.0"
-// CameraX core library using camera2 implementation
+    def camerax_version = '1.1.0-alpha04'
+    implementation "androidx.camera:camera-core:$camerax_version"
     implementation "androidx.camera:camera-camera2:$camerax_version"
-// CameraX Lifecycle Library
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
-// CameraX View class
-    implementation "androidx.camera:camera-view:1.0.0-alpha24"
+    implementation 'androidx.camera:camera-view:1.0.0-alpha24'
 
     // Koin main features for Android (Scope,ViewModel ...)
     implementation "io.insert-koin:koin-android:$koin_version"
@@ -77,6 +77,7 @@ dependencies {
     implementation "io.insert-koin:koin-android-ext:$koin_version"
 // Koin for Jetpack WorkManager
     implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
+
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
