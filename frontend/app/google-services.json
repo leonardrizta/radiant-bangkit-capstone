@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "83034357588",
+    "project_id": "plexiform-being-312905",
+    "storage_bucket": "plexiform-being-312905.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83034357588:android:665df5b2f4a00f54f052c1",
+        "android_client_info": {
+          "package_name": "com.c314.radiantprojects"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83034357588-v3up9mk7qfre5fs1svag877v4ro0mpss.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdHDmZN2LR8b9F4wtre6BxPahw6WSxIt8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83034357588-v3up9mk7qfre5fs1svag877v4ro0mpss.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
