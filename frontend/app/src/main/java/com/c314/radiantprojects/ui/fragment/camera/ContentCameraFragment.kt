@@ -327,7 +327,8 @@ class ContentCameraFragment : Fragment() {
                         }
 
                         override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                            val savedUri = output.savedUri ?: Uri.fromFile(photoFile)
+                            val savedUri =
+                                output.savedUri ?: Uri.fromFile(photoFile) //position file
                             Log.d(TAG, "Photo capture succeeded: $savedUri")
 
                             // We can only change the foreground Drawable using API level 23+ API
@@ -354,7 +355,7 @@ class ContentCameraFragment : Fragment() {
                                 arrayOf(savedUri.toFile().absolutePath),
                                 arrayOf(mimeType)
                             ) { _, uri ->
-                                Log.d(TAG, "Image capture scanned into media store: $uri")
+                                Log.d(TAG, "Image capture scanned into media store: $uri") // store
                             }
                         }
                     })
@@ -397,11 +398,12 @@ class ContentCameraFragment : Fragment() {
             if (true == outputDirectory.listFiles()?.isNotEmpty()) {
                 Navigation.findNavController(
                     requireActivity(), R.id.fragment_container
-                ).navigate(ContentCameraFragmentDirections
-                    .actionContentCameraFragmentToGalleryFragment(outputDirectory.absolutePath))
+                ).navigate(
+                    ContentCameraFragmentDirections
+                        .actionContentCameraFragmentToGalleryFragment(outputDirectory.absolutePath)
+                ) // directory file to send
             }
         }
-
 
 
     }

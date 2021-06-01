@@ -39,5 +39,17 @@
         <argument
             android:name="root_directory"
             app:argType="string" />
+        <action
+            android:id="@+id/action_galleryFragment_to_resultFragment"
+            app:destination="@id/resultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="com.c314.radiantprojects.ui.fragment.result.ResultFragment"
+        android:label="fragment_result"
+        tools:layout="@layout/fragment_result" >
+        <action
+            android:id="@+id/action_resultFragment_to_contentCameraFragment"
+            app:destination="@id/contentCameraFragment" />
     </fragment>
 </navigation>

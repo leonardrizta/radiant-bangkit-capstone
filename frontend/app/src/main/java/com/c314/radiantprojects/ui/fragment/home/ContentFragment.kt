@@ -16,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.c314.radiantprojects.R
 import com.c314.radiantprojects.core.data.repository.Resource
+import com.c314.radiantprojects.core.data.source.firebase.Articles
 import com.c314.radiantprojects.core.domain.model.LatestInfoDomain
 import com.c314.radiantprojects.core.ui.adapter.ArticlesAdapter
 import com.c314.radiantprojects.core.ui.adapter.LatestInfoAdapter
@@ -28,7 +29,9 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
 
     private var binding: FragmentContentBinding? = null
     private lateinit var mAdapter: LatestInfoAdapter
+    private lateinit var articleAdapter : ArticlesAdapter
     private val viewModel by viewModel<ContentViewModel>()
+//    private lateinit var articleViewModel : ArticleViewModel
 
 //    override fun onCreateView(
 //        inflater: LayoutInflater,
@@ -46,29 +49,54 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
         if (activity != null) {
 
             mAdapter = LatestInfoAdapter()
+            articleAdapter = ArticlesAdapter()
 
-            lifecycleScope.launch {
-                withContext(Dispatchers.Main){
-                    Log.d("coro","viewmodel start")
-                    delay(1500)
-                    viewModel.getLatestInfo().observe(viewLifecycleOwner, articleObserver)
-                }
-                coroutineContext.cancel()
-                Log.d("coro","end")
+            with(binding?.rvArticles){
+                this?.layoutManager = LinearLayoutManager(context)
+                this?.setHasFixedSize(true)
+                this?.adapter = articleAdapter
             }
-
-
 
             with(binding?.rvLatestInfo) {
                 this?.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                 this?.setHasFixedSize(true)
                 this?.adapter = mAdapter
             }
+
+            lifecycleScope.launch {
+                withContext(Dispatchers.Main){
+                    delay(2000)
+                    viewModel.getLatestInfo().observe(viewLifecycleOwner, latestInfoObserver)
+                }
+                coroutineContext.cancel()
+            }
+            lifecycleScope.launch {
+                withContext(Dispatchers.Main){
+                    delay(2000)
+                    viewModel.getArticles().observe(viewLifecycleOwner,articleObserver)
+                }
+                coroutineContext.cancel()
+            }
+
         }
 
     }
 
-    private val articleObserver = Observer<Resource<List<LatestInfoDomain>>> { latestInfo ->
+
+    private val articleObserver = Observer<MutableList<Articles>> {
+        if (it != null){
+            binding?.shimmerArticles?.stopShimmer()
+            binding?.rvArticles?.visibility = View.VISIBLE
+            articleAdapter.setListData(it)
+            articleAdapter.notifyDataSetChanged()
+
+        } else {
+            binding?.shimmerArticles?.stopShimmer()
+            binding?.rvArticles?.visibility = View.VISIBLE
+        }
+    }
+
+    private val latestInfoObserver = Observer<Resource<List<LatestInfoDomain>>> { latestInfo ->
         if (latestInfo != null) {
             when (latestInfo) {
                 is Resource.Loading -> binding?.shimmerLatestInfo?.startShimmer()

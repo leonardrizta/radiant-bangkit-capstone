@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.c314.radiantprojects.R
 import com.c314.radiantprojects.core.domain.model.LatestInfoDomain
 import com.c314.radiantprojects.databinding.ItemListLatestInfoBinding
 import java.util.ArrayList
@@ -24,10 +26,10 @@ class LatestInfoAdapter : RecyclerView.Adapter<LatestInfoAdapter.LatestInfoViewH
             binding.apply {
                 Glide.with(itemView.context)
                     .load(latestInfo.urlImage)
-//                    .apply(
-//                        RequestOptions.placeholderOf(R.drawable.ic_loading)
-//                            .error(R.drawable.ic_broken)
-//                    )
+                    .apply(
+                        RequestOptions.placeholderOf(R.drawable.ic_loading)
+                            .error(R.drawable.ic_broken)
+                    )
                     .into(ivArticles)
             }
         }
