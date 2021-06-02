@@ -2,6 +2,7 @@ package com.c314.radiantprojects.core.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
+
 data class LatestInfo(
     @field:SerializedName("author")
     var author: String,

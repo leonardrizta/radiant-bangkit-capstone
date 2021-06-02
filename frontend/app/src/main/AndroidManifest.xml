@@ -10,6 +10,7 @@
     <!-- Declare features -->
     <uses-feature android:name="android.hardware.camera" />
     <!-- Declare permissions -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -24,19 +25,8 @@
         tools:ignore="AllowBackup">
         <activity
             android:name=".ui.activity.camera.CameraActivity"
-            android:theme="@style/Theme.RadiantProjects.NoActionBar"
-            android:screenOrientation="fullUser"
-            android:rotationAnimation="seamless"
-            tools:targetApi="O">
-            <!-- Register as a system camera app -->
-            <intent-filter>
-                <action android:name="android.media.action.IMAGE_CAPTURE" />
-                <action android:name="android.media.action.STILL_IMAGE_CAMERA"/>
-                <action android:name="android.media.action.VIDEO_CAMERA" />
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-            <!-- Declare notch support -->
-            <meta-data android:name="android.notch_support" android:value="true"/>
+            android:theme="@style/Theme.RadiantProjects.NoActionBar">
+
         </activity>
         <activity android:name=".ui.activity.profile.ProfileActivity" />
         <activity
