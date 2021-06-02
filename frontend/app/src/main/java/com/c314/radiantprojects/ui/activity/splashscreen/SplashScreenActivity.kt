@@ -25,11 +25,9 @@ class SplashScreenActivity : AppCompatActivity() {
         binding.tvSc.startAnimation(anim)
 
         CoroutineScope(Dispatchers.Main).launch {
-            delay(5000)
+            delay(5200)
             startActivity(Intent(this@SplashScreenActivity, HomeActivity::class.java))
             finish()
         }
-
-
     }
 }
