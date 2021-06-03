@@ -14,8 +14,10 @@ class ResultActivity : AppCompatActivity() {
         val extras = intent.extras
 
         val diseaseTitle = extras?.getString("disease")
+        val confidence = extras?.getString("confidence")
 
         binding.titleDisease.text = diseaseTitle
+        binding.desc.text = confidence
 
     }
 

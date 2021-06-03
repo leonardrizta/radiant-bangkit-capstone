@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,8 +7,8 @@
     tools:context=".ui.activity.result.ResultActivity">
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="75dp"
         android:background="@color/splash_screen"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,69 +28,84 @@
                 android:layout_marginTop="20dp"
                 android:background="@color/white" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/title_disease"
-                android:layout_width="wrap_content"
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:textSize="24sp"
-                tools:text="Psoriasis" />
+                android:layout_margin="5dp"
+                app:cardCornerRadius="@dimen/margin_small">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="25dp"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                android:textSize="18sp"
-                tools:text="@tools:sample/lorem/random" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/symptons_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                tools:text="Symptons" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/title_disease"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:text="Psoriasis" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/desc"
+                        android:layout_width="310dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginHorizontal="25dp"
+                        android:layout_marginTop="20dp"
+                        android:textAlignment="center"
+                        android:textSize="14sp"
+                        android:gravity="center_vertical|end"
+                        tools:text="@tools:sample/lorem/random" />
+
+                    <TextView
+                        android:id="@+id/symptons_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:text="Symptons" />
 
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/symptons_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="25dp"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                tools:text="@tools:sample/lorem/random" />
+                    <TextView
+                        android:id="@+id/symptons_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginHorizontal="25dp"
+                        android:layout_marginTop="20dp"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        tools:text="@tools:sample/lorem/random" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/treatment_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                tools:text="Recomendatiosn Treatment" />
+                    <TextView
+                        android:id="@+id/treatment_title"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:textAlignment="center"
+                        android:textSize="24sp"
+                        tools:text="Recomendatiosn Treatment" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/treatment_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="25dp"
-                android:layout_marginTop="20dp"
-                android:textAlignment="center"
-                android:textSize="24sp"
-                tools:text="@tools:sample/lorem/random" />
+                    <TextView
+                        android:id="@+id/treatment_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginHorizontal="25dp"
+                        android:layout_marginTop="20dp"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        tools:text="@tools:sample/lorem/random" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
