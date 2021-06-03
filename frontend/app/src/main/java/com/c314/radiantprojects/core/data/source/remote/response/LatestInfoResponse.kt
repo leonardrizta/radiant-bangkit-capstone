@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class LatestInfoResponse (
     @field:SerializedName("articles")
-    val latestInfo: List<LatestInfo>
+    var latestInfo: List<LatestInfo>
     )

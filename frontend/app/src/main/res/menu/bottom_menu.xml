@@ -3,7 +3,7 @@
     <item
         android:id="@+id/nav_content"
         android:title="Home"
-        android:icon="@drawable/ic_home" />
+        android:icon="@drawable/ic_home_icon" />
 
     <item
         android:id="@+id/placeholder"
@@ -11,6 +11,6 @@
 
     <item
         android:id="@+id/nav_medicine"
-        android:title="Medicine"
-        android:icon="@drawable/ic_medicine" />
+        android:title="Treatment"
+        android:icon="@drawable/ic_treatment" />
 </menu>

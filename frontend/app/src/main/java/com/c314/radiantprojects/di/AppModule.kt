@@ -19,7 +19,7 @@ object AppModule {
     @FlowPreview
     val viewModelModule = module {
         viewModel { ContentViewModel(get()) }
-        viewModel { MedicineViewModel(get()) }
+        viewModel { MedicineViewModel() }
 //        viewModel { DetailViewModel(get()) }
 //        viewModel { FavoriteMovieTvViewModel(get()) }
 //        viewModel { SearchViewModel(get()) }

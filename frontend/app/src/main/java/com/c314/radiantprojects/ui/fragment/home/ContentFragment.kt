@@ -87,12 +87,14 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
         if (it != null){
             binding?.shimmerArticles?.stopShimmer()
             binding?.rvArticles?.visibility = View.VISIBLE
+            binding?.shimmerArticles?.visibility = View.GONE
             articleAdapter.setListData(it)
             articleAdapter.notifyDataSetChanged()
 
         } else {
             binding?.shimmerArticles?.stopShimmer()
-            binding?.rvArticles?.visibility = View.VISIBLE
+            binding?.rvArticles?.visibility = View.GONE
+            binding?.shimmerArticles?.visibility = View.VISIBLE
         }
     }
 
@@ -109,6 +111,8 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
                 is Resource.Error -> {
                     Toast.makeText(context, "gagal", Toast.LENGTH_SHORT).show()
                     binding?.shimmerLatestInfo?.stopShimmer()
+                    binding?.shimmerLatestInfo?.visibility = View.VISIBLE
+                    binding?.rvLatestInfo?.visibility = View.GONE
                 }
             }
         }

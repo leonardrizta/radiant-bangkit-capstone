@@ -9,8 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#F1EFEF</color>
     <color name="splash_screen">#B7D1E9</color>
-    <color name="text_main">#006BCD</color>
+    <color name="camera">#006BCD</color>
 
-    <color name="notFoundBackground">#DD222222</color>
-    <color name="foundBackground">#DD222222</color>
 </resources>

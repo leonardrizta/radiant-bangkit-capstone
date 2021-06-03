@@ -16,10 +16,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toFile
 import coil.load
 import com.c314.radiantprojects.core.data.source.remote.response.UploadResponse
 import com.c314.radiantprojects.core.data.source.remote.service.ApiConfig
 import com.c314.radiantprojects.databinding.ActivityCameraBinding
+import com.c314.radiantprojects.ui.activity.result.ResultActivity
 import com.c314.radiantprojects.utils.getFileName
 import com.c314.radiantprojects.utils.snackbar
 import com.karumi.dexter.Dexter
@@ -171,6 +173,7 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
                     selectedImageBitmap = data?.extras?.get("data") as Bitmap
                     binding.imageView.setImageBitmap(selectedImageBitmap)
 
+
 //                    //we are using coroutine image loader (coil)
 //                    binding.imageView.load(bitmap) {
 //                        crossfade(true)
@@ -242,12 +245,29 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
                         Log.d("Gallery", response.code().toString())
                         Log.d("Gallery", response.message())
                         binding.progressBar.progress = 100
+
+//                        val responseText = "Response code : ${response.code()}\n"+
+//                                "confidence : ${response.body()!!.result.confidence}\n"+
+//                                "prediction : ${response.body()!!.result.prediction}"
+                        val diseasePrediction = response.body()!!.result.prediction
+                        if (response.code() == 200) {
+                            val intent =
+                                Intent(this@CameraActivity, ResultActivity::class.java).apply {
+                                    putExtra(ResultActivity.disease, diseasePrediction)
+                                }
+                            startActivity(intent)
+                        }
+
+//                        binding.tvTest.text = responseText
+
                     }
                 }
             })
 
-        } else {
+        } else if(selectedImageBitmap != null) {
+
             val uri = bitmapToFile(selectedImageBitmap!!)
+//            val mFile = uri.toFile()
 
             val parcelFileDescriptor =
                 contentResolver.openFileDescriptor(uri, "r", null) ?: return
@@ -256,6 +276,8 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
             val file = File(cacheDir, contentResolver.getFileName(uri))
             val outputStream = FileOutputStream(file)
             inputStream.copyTo(outputStream)
+
+
 
             binding.progressBar.progress = 0
             val body = UploadRequestBody(file, "image", this)
@@ -342,6 +364,12 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
 
         // Return the saved bitmap uri
         return Uri.parse(file.absolutePath)
+    }
+
+
+
+    fun Context.toast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }
 
