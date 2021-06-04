@@ -216,7 +216,7 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
                 REQUEST_IMAGE_CAPTURE -> {
                     Toast.makeText(
                         this,
-                        "Image Saved, Please See Your Photo To gallery before upload it!",
+                        "Image Saved, Please See Your Photo To Gallery Before Upload It To Server!",
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -277,6 +277,7 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
                             val intent =
                                 Intent(this@CameraActivity, ResultActivity::class.java).apply {
                                     putExtra(ResultActivity.disease, diseasePrediction)
+                                    putExtra(ResultActivity.image,selectedImageUri.toString())
                                 }
                             startActivity(intent)
                         }
