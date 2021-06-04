@@ -7,6 +7,7 @@ import os
 from keras.models import load_model
 from PIL import Image
 from datetime import datetime
+from keras.preprocessing import image
 
 app = Flask(__name__)
 
@@ -37,19 +38,27 @@ def recognize_image():
         resp.status_code = 400
         return resp
     files = request.files.getlist('file')
-    filename = "predict_image.png"
+    filename = "temp_image.png"
+    errors = {}
+    success = False
     for file in files:
         if file and allowed_file(file.filename):
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             success = True
         else:
             errors["message"] = 'File type of {} is not allowed'.format(file.filename)
+
+    if not success:
+        resp = jsonify(errors)
+        resp.status_code = 400
+        return resp
     img_url = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
     # convert image to RGB
     img = Image.open(img_url).convert('RGB')
     now = datetime.now()
-    image_predict = 'static/uploads/' + now.strftime("%H%M%S") + ".png"
+    predict_image_path = 'static/uploads/' + now.strftime("%d%m%y-%H%M%S") + ".png"
+    image_predict = predict_image_path
     img.convert('RGB').save(image_predict, format="png")
     img.close()
 
@@ -57,12 +66,13 @@ def recognize_image():
     model = load_model('dermnet.h5', custom_objects={'auc': auc})
 
     # prepare image for prediction
-    img_array = io.imread(image_predict, as_gray=False)
-    small_grey = transform.resize(img_array, (300, 300), mode='symmetric', preserve_range=True)
-    img_to_predict = np.expand_dims(small_grey / 255.0, 0)
+    img = image.load_img(predict_image_path, target_size=(224, 224))
+    x = image.img_to_array(img)
+    x = np.expand_dims(x, axis=0)
+    images = np.vstack([x])
 
     # predict
-    prediction_array = model.predict(img_to_predict)
+    prediction_array = model.predict(images)
 
     # prepare api response
     class_names = ['Acne and Rosacea Photos', 'Actinic Keratosis Basal Cell Carcinoma and other Malignant Lesions',
