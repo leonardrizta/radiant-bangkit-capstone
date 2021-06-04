@@ -26,6 +26,10 @@ def auc(y_true, y_pred):
     return auc
 
 
+# load model for prediction
+model = load_model('dermnet.h5', custom_objects={'auc': auc})
+
+
 @app.route('/')
 def main():
     return 'This is Radiant Team API for predict skin disease'
@@ -61,9 +65,6 @@ def recognize_image():
     image_predict = predict_image_path
     img.convert('RGB').save(image_predict, format="png")
     img.close()
-
-    # load model for prediction
-    model = load_model('dermnet.h5', custom_objects={'auc': auc})
 
     # prepare image for prediction
     img = image.load_img(predict_image_path, target_size=(224, 224))
