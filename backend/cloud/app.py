@@ -75,8 +75,8 @@ def recognize_image():
     prediction_array = model.predict(images)
 
     # prepare api response
-    class_names = ['Acne and Rosacea Photos', 'Actinic Keratosis Basal Cell Carcinoma and other Malignant Lesions',
-                   'Eczema Photos', 'Light Diseases and Disorders of Pigmentation',
+    class_names = ['Acne and Rosacea', 'Actinic Keratosis',
+                   'Eczema', 'Light Diseases and Disorders of Pigmentation',
                    'Nail Fungus and other Nail Disease']
     result = {
         "prediction": class_names[np.argmax(prediction_array)],
