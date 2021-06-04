@@ -12,6 +12,7 @@ import java.util.ArrayList
 
 class LatestInfoAdapter : RecyclerView.Adapter<LatestInfoAdapter.LatestInfoViewHolder>() {
 
+    private lateinit var onItemClickCallback: OnItemClickCallback
     private var list = ArrayList<LatestInfoDomain>()
 
     fun setLastInfo(latestInfo: List<LatestInfoDomain>?) {
@@ -31,8 +32,23 @@ class LatestInfoAdapter : RecyclerView.Adapter<LatestInfoAdapter.LatestInfoViewH
                             .error(R.drawable.ic_broken)
                     )
                     .into(ivArticles)
+
+                itemView.setOnClickListener {
+                    onItemClickCallback.onItemClicked(latestInfo)
+                }
             }
         }
+
+    }
+
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+
+    interface OnItemClickCallback {
+        fun onItemClicked(latestInfo: LatestInfoDomain)
 
     }
 

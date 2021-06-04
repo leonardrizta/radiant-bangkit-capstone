@@ -9,7 +9,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_sc"
-        android:textColor="@color/text_main"
+        android:textColor="@color/camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:fontFamily="@font/dancing_script"

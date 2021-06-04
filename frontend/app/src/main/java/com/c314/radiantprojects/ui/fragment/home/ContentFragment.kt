@@ -1,5 +1,6 @@
 package com.c314.radiantprojects.ui.fragment.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -21,6 +22,7 @@ import com.c314.radiantprojects.core.domain.model.LatestInfoDomain
 import com.c314.radiantprojects.core.ui.adapter.ArticlesAdapter
 import com.c314.radiantprojects.core.ui.adapter.LatestInfoAdapter
 import com.c314.radiantprojects.databinding.FragmentContentBinding
+import com.c314.radiantprojects.ui.activity.detail.DetailActivity
 import kotlinx.coroutines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -63,6 +65,30 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
                 this?.adapter = mAdapter
             }
 
+            mAdapter.setOnItemClickCallback(object : LatestInfoAdapter.OnItemClickCallback{
+                override fun onItemClicked(latestInfo: LatestInfoDomain) {
+                    val intent = Intent(context, DetailActivity::class.java).apply {
+                        putExtra(DetailActivity.detailLatestInfo, latestInfo)
+                        putExtra(DetailActivity.content,"latestInfo")
+                    }
+                    startActivity(intent)
+                }
+
+            })
+
+            articleAdapter.setOnItemClickCallback(object: ArticlesAdapter.OnItemClickCallback{
+                override fun onItemClicked(article: Articles) {
+                    val intent = Intent(context, DetailActivity::class.java).apply {
+                        putExtra(DetailActivity.detailArticle, article)
+                        putExtra(DetailActivity.content,"article")
+                    }
+                    startActivity(intent)
+                }
+
+            })
+
+
+
             lifecycleScope.launch {
                 withContext(Dispatchers.Main){
                     delay(2000)
@@ -87,12 +113,14 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
         if (it != null){
             binding?.shimmerArticles?.stopShimmer()
             binding?.rvArticles?.visibility = View.VISIBLE
+            binding?.shimmerArticles?.visibility = View.GONE
             articleAdapter.setListData(it)
             articleAdapter.notifyDataSetChanged()
 
         } else {
             binding?.shimmerArticles?.stopShimmer()
-            binding?.rvArticles?.visibility = View.VISIBLE
+            binding?.rvArticles?.visibility = View.GONE
+            binding?.shimmerArticles?.visibility = View.VISIBLE
         }
     }
 
@@ -109,6 +137,8 @@ class ContentFragment : Fragment(R.layout.fragment_content) {
                 is Resource.Error -> {
                     Toast.makeText(context, "gagal", Toast.LENGTH_SHORT).show()
                     binding?.shimmerLatestInfo?.stopShimmer()
+                    binding?.shimmerLatestInfo?.visibility = View.VISIBLE
+                    binding?.rvLatestInfo?.visibility = View.GONE
                 }
             }
         }

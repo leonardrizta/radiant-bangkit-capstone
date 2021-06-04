@@ -18,6 +18,6 @@
             L 7.5,123.5
             a 5,5,0,0,1,-5,-5
             Z"
-        android:strokeColor="@android:color/white"
+        android:strokeColor="@color/splash_screen"
         android:strokeWidth="1"/>
 </vector>
