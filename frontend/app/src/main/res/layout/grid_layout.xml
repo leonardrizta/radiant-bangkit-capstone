@@ -18,7 +18,6 @@
             android:layout_height="150dp"
             android:scaleType="fitXY"
             android:background="@color/splash_screen"
-
             />
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title_treatment"

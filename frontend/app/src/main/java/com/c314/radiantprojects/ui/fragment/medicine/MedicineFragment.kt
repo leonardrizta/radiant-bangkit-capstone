@@ -1,5 +1,6 @@
 package com.c314.radiantprojects.ui.fragment.medicine
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import com.c314.radiantprojects.core.data.source.firebase.Articles
 import com.c314.radiantprojects.core.data.source.firebase.Disease
 import com.c314.radiantprojects.core.ui.adapter.MedicineAdapter
 import com.c314.radiantprojects.databinding.FragmentMedicineBinding
+import com.c314.radiantprojects.ui.activity.detail.DetailActivity
 import kotlinx.coroutines.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -43,6 +45,17 @@ class MedicineFragment : Fragment(R.layout.fragment_medicine) {
                 }
                 coroutineContext.cancel()
             }
+
+            mAdapter.setOnItemClickCallback(object : MedicineAdapter.OnItemClickCallback{
+                override fun onItemClicked(disease: Disease) {
+                    val intent = Intent(context, DetailActivity::class.java).apply {
+                        putExtra(DetailActivity.detailTreatment, disease)
+                        putExtra(DetailActivity.content,"treatment")
+                    }
+                    startActivity(intent)
+                }
+
+            })
         }
     }
 

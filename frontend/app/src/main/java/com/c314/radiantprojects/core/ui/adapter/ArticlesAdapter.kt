@@ -16,6 +16,7 @@ import com.c314.radiantprojects.databinding.ItemListArticlesBinding
 class ArticlesAdapter()
     : RecyclerView.Adapter<ArticlesAdapter.ArticlesViewHolder>()  {
 
+    private lateinit var onItemClickCallback: OnItemClickCallback
     private var dataList = mutableListOf<Articles>()
 
 
@@ -37,8 +38,22 @@ class ArticlesAdapter()
                     )
                     .into(imgItems)
                 tvTitle.text = article.title
+
+                itemView.setOnClickListener {
+                    onItemClickCallback.onItemClicked(article)
+                }
             }
         }
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+
+    interface OnItemClickCallback {
+        fun onItemClicked(article: Articles)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticlesViewHolder {

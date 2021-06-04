@@ -22,7 +22,7 @@
         android:theme="@style/Theme.RadiantProjects"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.activity.DetailActivity"/>
+        <activity android:name=".ui.activity.detail.DetailActivity"/>
         <activity android:name=".ui.activity.result.ResultActivity" />
         <activity
             android:name=".ui.activity.camera.CameraActivity" />
@@ -46,7 +46,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.android.fileprovider"
+            android:authorities="${applicationId}.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -55,7 +55,12 @@
         </provider>
 
 
-
     </application>
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
 
 </manifest>

@@ -9,10 +9,12 @@ import com.bumptech.glide.request.RequestOptions
 import com.c314.radiantprojects.R
 import com.c314.radiantprojects.core.data.source.firebase.Articles
 import com.c314.radiantprojects.core.data.source.firebase.Disease
+import com.c314.radiantprojects.core.domain.model.LatestInfoDomain
 import com.c314.radiantprojects.databinding.GridLayoutBinding
 
 class MedicineAdapter : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>() {
 
+    private lateinit var onItemClickCallback: OnItemClickCallback
     private var dataList = mutableListOf<Disease>()
 
 
@@ -26,17 +28,31 @@ class MedicineAdapter : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>
         RecyclerView.ViewHolder(binding.root) {
         fun bind(disease: Disease) {
             binding.apply {
-//                Glide.with(itemView.context)
-//                    .load(article.url_img)
-//                    .apply(
-//                        RequestOptions.placeholderOf(R.drawable.ic_loading)
-//                            .error(R.drawable.ic_broken)
-//                    )
-//                    .into(imgItems)
+                Glide.with(itemView.context)
+                    .load(disease.image)
+                    .apply(
+                        RequestOptions.placeholderOf(R.drawable.ic_loading)
+                            .error(R.drawable.ic_broken)
+                    )
+                    .into(ivTreatment)
                 titleTreatment.text = disease.title
+
+                itemView.setOnClickListener {
+                    onItemClickCallback.onItemClicked(disease)
+                }
             }
+
         }
 
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+
+    interface OnItemClickCallback {
+        fun onItemClicked(disease: Disease)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicineViewHolder {
