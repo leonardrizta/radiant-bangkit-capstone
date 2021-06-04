@@ -278,6 +278,7 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
                                 Intent(this@CameraActivity, ResultActivity::class.java).apply {
                                     putExtra(ResultActivity.disease, diseasePrediction)
                                     putExtra(ResultActivity.image,selectedImageUri.toString())
+                                    putExtra(ResultActivity.file,file.toString())
                                 }
                             startActivity(intent)
                         }
