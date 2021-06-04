@@ -25,30 +25,61 @@ class ResultActivity : AppCompatActivity() {
 
 
 
-        if(extras !=null){
-            if(disease == "Acne and Rosacea Photos"){
-                FirebaseFirestore.getInstance().collection("disease").document("acne").get().addOnSuccessListener {
+        if (extras != null) {
+            if (disease == "Acne and Rosacea Photos") {
+                FirebaseFirestore.getInstance().collection("disease").document("acne").get()
+                    .addOnSuccessListener {
+                        binding.titleDetail.text = it.getString("title")
+                        binding.desc.text = it.getString("description")
+                        binding.titleContent.text = "Symptoms"
+                        binding.content.text = it.getString("symptoms")
+                        binding.treatment.text = it.getString("treatments")
+
+                    }
+//                binding.ivDetail.setImageURI(fileUri)
+                Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
+            } else if (disease == "Actinic Keratosis Basal Cell Carcinoma and other Malignant Lesions") {
+                FirebaseFirestore.getInstance().collection("disease").document("actinic").get()
+                    .addOnSuccessListener {
+                        binding.titleDetail.text = it.getString("title")
+                        binding.desc.text = it.getString("description")
+                        binding.titleContent.text = "Symptoms"
+                        binding.content.text = it.getString("symptoms")
+                        binding.treatment.text = it.getString("treatments")
+                    }
+//                binding.ivDetail.setImageURI(fileUri)
+                Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
+            } else if (disease == "Light Diseases and Disorders of Pigmentation") {
+                FirebaseFirestore.getInstance().collection("disease")
+                    .document("Pigmentationdisorder").get().addOnSuccessListener {
                     binding.titleDetail.text = it.getString("title")
+                    binding.desc.text = it.getString("description")
+                    binding.titleContent.text = "Symptoms"
+                    binding.content.text = it.getString("symptoms")
+                    binding.treatment.text = it.getString("treatments")
                 }
 //                binding.ivDetail.setImageURI(fileUri)
                 Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
-            } else if(disease == "Actinic Keratosis Basal Cell Carcinoma and other Malignant Lesions"){
-                FirebaseFirestore.getInstance().collection("disease").document("actinic").get().addOnSuccessListener {
-                    binding.titleDetail.text = it.getString("title")
-                }
+            } else if (disease == "Nail Fungus and other Nail Disease") {
+                FirebaseFirestore.getInstance().collection("disease").document("nailfungus").get()
+                    .addOnSuccessListener {
+                        binding.titleDetail.text = it.getString("title")
+                        binding.desc.text = it.getString("description")
+                        binding.titleContent.text = "Symptoms"
+                        binding.content.text = it.getString("symptoms")
+                        binding.treatment.text = it.getString("treatments")
+                    }
 //                binding.ivDetail.setImageURI(fileUri)
                 Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
-            } else if(disease == "Light Diseases and Disorders of Pigmentation"){
-                FirebaseFirestore.getInstance().collection("disease").document("Pigmentationdisorder").get().addOnSuccessListener {
-                    binding.titleDetail.text = it.getString("title")
-                }
-//                binding.ivDetail.setImageURI(fileUri)
-                Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
-            } else if (disease == "Nail Fungus and other Nail Disease"){
-                FirebaseFirestore.getInstance().collection("disease").document("nailfungus").get().addOnSuccessListener {
-                    binding.titleDetail.text = it.getString("title")
-                }
-//                binding.ivDetail.setImageURI(fileUri)
+            } else if (disease == "Eczema Photos") {
+                FirebaseFirestore.getInstance().collection("disease").document("eczema").get()
+                    .addOnSuccessListener {
+                        binding.titleDetail.text = it.getString("title")
+                        binding.desc.text = it.getString("description")
+                        binding.titleContent.text = "Symptoms"
+                        binding.content.text = it.getString("symptoms")
+                        binding.treatment.text = it.getString("treatments")
+                    }
                 Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
             }
 
@@ -57,8 +88,7 @@ class ResultActivity : AppCompatActivity() {
     }
 
 
-
-    companion object{
+    companion object {
         const val disease = "disease"
         const val image = "image"
         const val file = "file"

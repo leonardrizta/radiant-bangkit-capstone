@@ -20,9 +20,6 @@ object AppModule {
     val viewModelModule = module {
         viewModel { ContentViewModel(get()) }
         viewModel { MedicineViewModel() }
-//        viewModel { DetailViewModel(get()) }
-//        viewModel { FavoriteMovieTvViewModel(get()) }
-//        viewModel { SearchViewModel(get()) }
     }
 
 }
