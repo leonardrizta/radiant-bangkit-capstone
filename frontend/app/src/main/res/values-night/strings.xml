@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Dermisity</string>
+    <string name="welcome">Welcome, </string>
+    <string name="dermisity">To Dermisity</string>
+    <string name="gallery_btn">Gallery</string>
+    <string name="upload_btn">Upload</string>
+    <string name="capture_btn">Capture</string>
+    <string name="image_camera">Image Camera</string>
+    <string name="image_detail">Image Detail</string>
+    <string name="image_latest">Image Latest</string>
+    <string name="description">Description</string>
+    <string name="content">Content</string>
+    <string name="treatment">Treatment</string>
+    <string name="fab_camera">Camera</string>
+    <string name="confidence">Confidence : </string>
+    <string name="latest_info">Latest Info</string>
+    <string name="Article">Articles For You</string>
+    <string name="select_image">Select An Image First</string>
+    <string name="mode">r</string>
+    <string name="symptoms">Symptoms</string>
+    <string name="not_found">Result Not Found</string>
+    <string name="image">Image</string>
+    <string name="file">file</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+</resources>
