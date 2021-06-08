@@ -68,6 +68,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecyclelivedata_version"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleextensions_version"
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation "com.airbnb.android:lottie:3.7.0"
 
     def camerax_version = '1.1.0-alpha04'
     implementation "androidx.camera:camera-core:$camerax_version"
