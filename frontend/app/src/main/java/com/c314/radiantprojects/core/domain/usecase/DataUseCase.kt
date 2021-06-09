@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface DataUseCase {
 
-    fun getLatestInfo() : Flow<Resource<List<LatestInfoDomain>>>
+    fun getLatestInfo(): Flow<Resource<List<LatestInfoDomain>>>
 }

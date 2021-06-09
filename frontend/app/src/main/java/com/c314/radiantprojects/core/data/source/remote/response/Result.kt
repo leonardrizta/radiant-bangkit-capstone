@@ -6,5 +6,5 @@ data class Result(
     @field:SerializedName("confidence")
     val confidence: String,
     @field:SerializedName("prediction")
-    val prediction : String,
+    val prediction: String,
 )

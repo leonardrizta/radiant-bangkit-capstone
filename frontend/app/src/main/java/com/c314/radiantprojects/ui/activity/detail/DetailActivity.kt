@@ -1,9 +1,8 @@
 package com.c314.radiantprojects.ui.activity.detail
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.c314.radiantprojects.R
@@ -14,7 +13,7 @@ import com.c314.radiantprojects.databinding.ActivityDetailBinding
 
 class DetailActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityDetailBinding
+    private lateinit var binding: ActivityDetailBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,7 +55,7 @@ class DetailActivity : AppCompatActivity() {
 
             it.titleDetail.text = detailTreatment?.title
             it.desc.text = detailTreatment?.description
-            it.titleContent.text = "Symptoms"
+            it.titleContent.text = resources.getString(R.string.symptoms)
             it.content.text = detailTreatment?.symptoms
             it.treatment.text = detailTreatment?.treatment
 
@@ -65,7 +64,7 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private fun showDetailArticle(detailArticle: Articles?) {
-        binding.let{
+        binding.let {
             Glide.with(this)
                 .load(detailArticle?.url_img)
                 .apply(
@@ -104,7 +103,7 @@ class DetailActivity : AppCompatActivity() {
         if (text.isNullOrBlank() || text == "null") " - " else text
 
 
-    companion object{
+    companion object {
         const val detailLatestInfo = "detailLatestInfo"
         const val detailArticle = "detailArticle"
         const val detailTreatment = "detailTreatment"

@@ -29,6 +29,7 @@
                 android:layout_height="200dp"
                 android:layout_gravity="center|end"
                 android:layout_marginBottom="15dp"
+                android:contentDescription="@string/todo"
                 android:scaleType="centerCrop"
                 app:layout_collapseMode="parallax"
                 tools:src="@color/grey" />
@@ -51,9 +52,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/result"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title_detail"
@@ -74,10 +75,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="10dp"
+                android:text="@string/Confidence"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_detail"
-                android:text="Confidence :" />
+                app:layout_constraintTop_toBottomOf="@+id/title_detail" />
 
 
             <com.google.android.material.textview.MaterialTextView
@@ -97,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="15dp"
-                android:text="Description"
+                android:text="@string/Description"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_confidence" />
@@ -120,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="15dp"
-                android:text="Content"
+                android:text="@string/Content"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/desc" />
@@ -144,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="15dp"
-                android:text="Treatment"
+                android:text="@string/Treatment"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/content" />
@@ -168,7 +169,6 @@
     <include
         android:id="@+id/no_result"
         layout="@layout/no_result"
-        tools:visibility="gone"
-        />
+        tools:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

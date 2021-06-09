@@ -4,19 +4,18 @@ package com.c314.radiantprojects.ui.activity.camera
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import coil.load
+import com.c314.radiantprojects.R
 import com.c314.radiantprojects.core.data.source.remote.response.UploadResponse
 import com.c314.radiantprojects.core.data.source.remote.service.ApiConfig
 import com.c314.radiantprojects.databinding.ActivityCameraBinding
@@ -44,11 +43,11 @@ import java.util.*
 
 private const val GALLERY_REQUEST_CODE = 2
 private const val REQUEST_IMAGE_CAPTURE = 3
+
 class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
     private lateinit var binding: ActivityCameraBinding
 
     private var selectedImageUri: Uri? = null
-    private var selectedImageBitmap: Bitmap? = null
 
     private val mConfig = ApiConfig
     private lateinit var currentPhotoPath: String
@@ -72,15 +71,14 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
             uploadImage()
         }
 
-        //when you click on the image
         binding.imageView.setOnClickListener {
             val pictureDialog = AlertDialog.Builder(this)
-            pictureDialog.setTitle("Select Action")
+            pictureDialog.setTitle(resources.getString(R.string.select_action))
             val pictureDialogItem = arrayOf(
-                "Select photo from Gallery",
-                "Capture photo from Camera"
+                resources.getString(R.string.select_gallery),
+                resources.getString(R.string.capture_camera)
             )
-            pictureDialog.setItems(pictureDialogItem) { dialog, which ->
+            pictureDialog.setItems(pictureDialogItem) { _, which ->
 
                 when (which) {
                     0 -> gallery()
@@ -104,7 +102,7 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
             override fun onPermissionDenied(p0: PermissionDeniedResponse?) {
                 Toast.makeText(
                     this@CameraActivity,
-                    "You have denied the storage permission to select image",
+                    resources.getString(R.string.permission_denied_select_image),
                     Toast.LENGTH_SHORT
                 ).show()
                 showRotationalDialogForPermission()
@@ -120,7 +118,7 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
 
     private fun gallery() {
         val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
+        intent.type = resources.getString(R.string.image_type)
         startActivityForResult(intent, GALLERY_REQUEST_CODE)
     }
 
@@ -136,11 +134,9 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
                 object : MultiplePermissionsListener {
                     override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
                         report?.let {
-
                             if (report.areAllPermissionsGranted()) {
                                 camera()
                             }
-
                         }
                     }
 
@@ -159,20 +155,15 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
 
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)
-            if (takePictureIntent == null) {
-                Toast.makeText(this, "Unable to save photo", Toast.LENGTH_SHORT).show()
-
-            } else {
-                val photoFile = createImageFile()
-                photoFile.also {
-                    val photoUri = FileProvider.getUriForFile(
-                        this,
-                        "com.c314.radiantprojects.fileprovider",
-                        it
-                    )
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile)
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-                }
+            val photoFile = createImageFile()
+            photoFile.also {
+                FileProvider.getUriForFile(
+                    this,
+                    resources.getString(R.string.authority),
+                    it
+                )
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoFile)
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
             }
         }
     }
@@ -180,8 +171,7 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
 
     @Throws(IOException::class)
     private fun createImageFile(): File {
-        // Create an image file name
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd",Locale.getDefault()).format(Date())
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd", Locale.getDefault()).format(Date())
         val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
             "JPEG_${timeStamp}_",
@@ -208,7 +198,7 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
                 REQUEST_IMAGE_CAPTURE -> {
                     Toast.makeText(
                         this,
-                        "Image Saved, Please See Your Photo To Gallery Before Upload It To Server!",
+                        resources.getString(R.string.image_saved),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -217,14 +207,16 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
     }
 
 
-    //    && selectedImageBitmap == null
     private fun uploadImage() {
         if (selectedImageUri == null) {
-            binding.camera.snackbar("Select an Image First")
+            binding.camera.snackbar(resources.getString(R.string.select_image_first))
             return
         } else if (selectedImageUri != null) {
             val parcelFileDescriptor =
-                contentResolver.openFileDescriptor(selectedImageUri!!, "r", null) ?: return
+                contentResolver.openFileDescriptor(
+                    selectedImageUri!!,
+                    resources.getString(R.string.mode), null
+                ) ?: return
 
             val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
             val file = File(cacheDir, contentResolver.getFileName(selectedImageUri!!))
@@ -233,11 +225,11 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
 
 
             binding.progressBar.progress = 0
-            val body = UploadRequestBody(file, "image", this)
+            val body = UploadRequestBody(file, resources.getString(R.string.image), this)
 
             mConfig.getApiService().uploadImage(
                 MultipartBody.Part.createFormData(
-                    "file",
+                    resources.getString(R.string.file),
                     file.name,
                     body
                 ),
@@ -266,9 +258,8 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
                             val intent =
                                 Intent(this@CameraActivity, ResultActivity::class.java).apply {
                                     putExtra(ResultActivity.disease, diseasePrediction)
-                                    putExtra(ResultActivity.image,selectedImageUri.toString())
-                                    putExtra(ResultActivity.file,file.toString())
-                                    putExtra(ResultActivity.confidence,diseaseConfidence)
+                                    putExtra(ResultActivity.file, file.toString())
+                                    putExtra(ResultActivity.confidence, diseaseConfidence)
                                 }
                             startActivity(intent)
                         }
@@ -281,15 +272,14 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
     private fun showRotationalDialogForPermission() {
         AlertDialog.Builder(this)
             .setMessage(
-                "It looks like you have turned off permissions"
-                        + "required for this feature. It can be enable under App settings!!!"
+                resources.getString(R.string.message_permisions)
             )
 
-            .setPositiveButton("Go TO SETTINGS") { _, _ ->
+            .setPositiveButton(resources.getString(R.string.goto_setting)) { _, _ ->
 
                 try {
                     val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                    val uri = Uri.fromParts("package", packageName, null)
+                    val uri = Uri.fromParts(resources.getString(R.string.scheme), packageName, null)
                     intent.data = uri
                     startActivity(intent)
 
@@ -298,7 +288,7 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
                 }
             }
 
-            .setNegativeButton("CANCEL") { dialog, _ ->
+            .setNegativeButton(resources.getString(R.string.cancel)) { dialog, _ ->
                 dialog.dismiss()
             }.show()
     }
@@ -306,7 +296,6 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
     override fun onProgressUpdate(percentage: Int) {
         binding.progressBar.progress = percentage
     }
-
 
 
 }

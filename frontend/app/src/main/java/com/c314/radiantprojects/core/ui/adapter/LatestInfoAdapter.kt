@@ -8,7 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.c314.radiantprojects.R
 import com.c314.radiantprojects.core.domain.model.LatestInfoDomain
 import com.c314.radiantprojects.databinding.ItemListLatestInfoBinding
-import java.util.ArrayList
+import java.util.*
 
 class LatestInfoAdapter : RecyclerView.Adapter<LatestInfoAdapter.LatestInfoViewHolder>() {
 

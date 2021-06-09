@@ -5,5 +5,5 @@ import com.c314.radiantprojects.core.domain.model.LatestInfoDomain
 import kotlinx.coroutines.flow.Flow
 
 interface IDataRepository {
-    fun getLatestInfo() : Flow<Resource<List<LatestInfoDomain>>>
+    fun getLatestInfo(): Flow<Resource<List<LatestInfoDomain>>>
 }

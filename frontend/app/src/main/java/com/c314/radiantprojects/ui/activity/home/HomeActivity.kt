@@ -10,7 +10,6 @@ import androidx.navigation.ui.setupWithNavController
 import com.c314.radiantprojects.R
 import com.c314.radiantprojects.databinding.ActivityHomeBinding
 import com.c314.radiantprojects.ui.activity.camera.CameraActivity
-import com.c314.radiantprojects.ui.fragment.home.ContentFragment
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -32,9 +31,6 @@ class HomeActivity : AppCompatActivity() {
             bottomNavigationView.menu.getItem(1).isEnabled = false
             fab.setOnClickListener {
                 val intent = Intent(this@HomeActivity, CameraActivity::class.java)
-//                    .apply {
-//                    putExtra(CameraActivity.CAMERA,"camera")
-//                }
                 startActivity(intent)
             }
         }

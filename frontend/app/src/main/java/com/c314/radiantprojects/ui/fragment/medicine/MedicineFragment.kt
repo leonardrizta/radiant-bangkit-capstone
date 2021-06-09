@@ -7,9 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.c314.radiantprojects.R
-import com.c314.radiantprojects.core.data.source.firebase.Articles
 import com.c314.radiantprojects.core.data.source.firebase.Disease
 import com.c314.radiantprojects.core.ui.adapter.MedicineAdapter
 import com.c314.radiantprojects.databinding.FragmentMedicineBinding
@@ -21,16 +19,16 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MedicineFragment : Fragment(R.layout.fragment_medicine) {
 
 
-    private var binding: FragmentMedicineBinding?=null
+    private var binding: FragmentMedicineBinding? = null
     private val viewModel by viewModel<MedicineViewModel>()
-    private lateinit var mAdapter : MedicineAdapter
+    private lateinit var mAdapter: MedicineAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMedicineBinding.bind(view)
 
         if (activity != null) {
-           mAdapter = MedicineAdapter()
+            mAdapter = MedicineAdapter()
 
             with(binding?.rvMedicine) {
                 this?.layoutManager = GridLayoutManager(context, 2)
@@ -46,11 +44,11 @@ class MedicineFragment : Fragment(R.layout.fragment_medicine) {
                 coroutineContext.cancel()
             }
 
-            mAdapter.setOnItemClickCallback(object : MedicineAdapter.OnItemClickCallback{
+            mAdapter.setOnItemClickCallback(object : MedicineAdapter.OnItemClickCallback {
                 override fun onItemClicked(disease: Disease) {
                     val intent = Intent(context, DetailActivity::class.java).apply {
                         putExtra(DetailActivity.detailTreatment, disease)
-                        putExtra(DetailActivity.content,"treatment")
+                        putExtra(DetailActivity.content, "treatment")
                     }
                     startActivity(intent)
                 }
@@ -60,7 +58,7 @@ class MedicineFragment : Fragment(R.layout.fragment_medicine) {
     }
 
     private val medicineObserver = Observer<MutableList<Disease>> {
-        if (it != null){
+        if (it != null) {
             binding?.shimmerMedicine?.stopShimmer()
             binding?.rvMedicine?.visibility = View.VISIBLE
             binding?.shimmerMedicine?.visibility = View.GONE
@@ -68,9 +66,9 @@ class MedicineFragment : Fragment(R.layout.fragment_medicine) {
             mAdapter.notifyDataSetChanged()
 
         } else {
-                binding?.shimmerMedicine?.stopShimmer()
-                binding?.shimmerMedicine?.visibility = View.VISIBLE
-                binding?.rvMedicine?.visibility = View.GONE
+            binding?.shimmerMedicine?.stopShimmer()
+            binding?.shimmerMedicine?.visibility = View.VISIBLE
+            binding?.rvMedicine?.visibility = View.GONE
         }
     }
 

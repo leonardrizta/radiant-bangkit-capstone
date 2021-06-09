@@ -13,35 +13,31 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".MyAplication"
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.RadiantProjects"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup">
-        <activity android:name=".ui.activity.detail.DetailActivity"/>
+        <activity android:name=".ui.activity.detail.DetailActivity" />
         <activity android:name=".ui.activity.result.ResultActivity" />
-        <activity
-            android:name=".ui.activity.camera.CameraActivity" />
-        <activity android:name=".ui.activity.profile.ProfileActivity" />
-        <activity
-            android:name=".ui.activity.splashscreen.SplashScreenActivity">
+        <activity android:name=".ui.activity.camera.CameraActivity" />
+        <activity android:name=".ui.activity.splashscreen.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.activity.home.HomeActivity" />
+        <activity android:name=".ui.activity.home.HomeActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
 
 
         <provider
@@ -51,7 +47,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"/>
+                android:resource="@xml/file_paths" />
         </provider>
 
 

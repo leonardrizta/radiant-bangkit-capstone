@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class UploadResponse(
     @field:SerializedName("data")
-    val result : Result,
+    val result: Result,
     val isError: Boolean,
     val message: String,
     val statusCode: Int

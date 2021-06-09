@@ -1,43 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp"
     android:layout_margin="20dp"
+    app:cardCornerRadius="10dp"
     app:cardElevation="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <ImageView
             android:id="@+id/iv_treatment"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:scaleType="fitXY"
             android:background="@color/splash_screen"
-            />
+            android:scaleType="fitXY"
+            android:contentDescription="@string/todo"/>
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/title_treatment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            tools:text="@tools:sample/lorem"
-            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="15dp"
-            />
+            android:layout_marginVertical="10dp"
+            android:textSize="18sp"
+            tools:text="@tools:sample/lorem" />
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/desc_treatment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:layout_marginBottom="10dp"
             android:layout_marginHorizontal="15dp"
-
+            android:layout_marginBottom="10dp"
             android:text="@string/app_name"
-            />
+
+            android:textSize="14sp" />
 
     </LinearLayout>
 

@@ -6,10 +6,10 @@ import com.c314.radiantprojects.core.data.source.local.entity.LatestInfoEntity
 
 @Database(
     entities = [LatestInfoEntity::class],
-    version =1,
+    version = 1,
     exportSchema = false
 )
-abstract class AppDatabase : RoomDatabase(){
+abstract class AppDatabase : RoomDatabase() {
 
     abstract fun appDao(): AppDao
 

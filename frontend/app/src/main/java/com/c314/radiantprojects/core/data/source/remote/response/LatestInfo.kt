@@ -11,14 +11,14 @@ data class LatestInfo(
     var title: String,
 
     @field:SerializedName("description")
-    var description : String,
+    var description: String,
 
     @field:SerializedName("urlToImage")
-    var urlImage : String,
+    var urlImage: String,
 
     @field:SerializedName("publishedAt")
-    var publishedAt : String,
+    var publishedAt: String,
 
     @field:SerializedName("content")
-    var content : String
+    var content: String
 )

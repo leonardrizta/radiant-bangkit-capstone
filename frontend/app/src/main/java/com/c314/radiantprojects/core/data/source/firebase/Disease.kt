@@ -5,9 +5,9 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Disease(
-    val title : String,
-    val description : String,
-    val symptoms : String,
-    val treatment : String,
-    val image : String
+    val title: String,
+    val description: String,
+    val symptoms: String,
+    val treatment: String,
+    val image: String
 ) : Parcelable

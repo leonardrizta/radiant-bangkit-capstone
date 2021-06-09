@@ -1,6 +1,32 @@
 <resources>
     <string name="app_name">Dermisity</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="symptoms">Symptoms</string>
+    <string name="select_action">Select Action</string>
+    <string name="select_gallery">Select photo from Gallery</string>
+    <string name="capture_camera">Capture photo from Camera</string>
+    <string name="permission_denied_select_image">You have denied the storage permission to select image</string>
+    <string name="image_type">image/*</string>
+    <string name="authority">com.c314.radiantprojects.fileprovider</string>
+    <string name="image_saved">Image Saved, Please See Your Photo To Gallery Before Upload It To Server!</string>
+    <string name="select_image_first">Select an Image First</string>
+    <string name="mode">r</string>
+    <string name="image">image</string>
+    <string name="file">file</string>
+    <string name="message_permisions">It looks like you have turned off permissions required for this feature. It can be enable under App settings!!!</string>
+    <string name="goto_setting">Go To Settings</string>
+    <string name="scheme">package</string>
+    <string name="cancel">Cancel</string>
+    <string name="todo">ToDo</string>
+    <string name="upload">Upload</string>
+    <string name="gallery">Gallery</string>
+    <string name="Description">Description</string>
+    <string name="Content">Content</string>
+    <string name="Treatment">Treatment</string>
+    <string name="Confidence">Confidence : </string>
+    <string name="welcome">Welcome,</string>
+    <string name="to_dermisity">To Dermisity</string>
+    <string name="latest_info">Latest Info</string>
+    <string name="Articles">Articles For You</string>
+    <string name="result_not_found">Result Not Found</string>
+    <string name="error">Error</string>
 </resources>

@@ -12,12 +12,12 @@ import org.koin.core.logger.Level
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class MyAplication : Application() {
+class MyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin {
             androidLogger(Level.NONE)
-            androidContext(this@MyAplication)
+            androidContext(this@MyApplication)
             modules(
                 listOf(
                     CoreModule.databaseModule,

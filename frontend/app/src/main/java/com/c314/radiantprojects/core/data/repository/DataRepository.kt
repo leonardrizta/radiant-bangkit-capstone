@@ -6,18 +6,17 @@ import com.c314.radiantprojects.core.data.source.remote.api.ApiResponse
 import com.c314.radiantprojects.core.data.source.remote.response.LatestInfo
 import com.c314.radiantprojects.core.domain.model.LatestInfoDomain
 import com.c314.radiantprojects.core.domain.repository.IDataRepository
-import com.c314.radiantprojects.core.utils.AppExecutors
 import com.c314.radiantprojects.core.utils.DataMapper
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class DataRepository (
+class DataRepository(
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
 ) : IDataRepository {
 
     override fun getLatestInfo(): Flow<Resource<List<LatestInfoDomain>>> =
-        object : NetworkBoundResource<List<LatestInfoDomain>,List<LatestInfo>>(){
+        object : NetworkBoundResource<List<LatestInfoDomain>, List<LatestInfo>>() {
             override fun loadFromDB(): Flow<List<LatestInfoDomain>> {
                 return localDataSource.getLatestInfo().map {
                     DataMapper.mapEntityToDomain(it)
@@ -38,10 +37,6 @@ class DataRepository (
                 localDataSource.insertLatestInfo(latestInfo)
             }
         }.asFlow()
-
-
-
-
 
 
 }
