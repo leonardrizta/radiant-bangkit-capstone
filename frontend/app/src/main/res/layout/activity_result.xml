@@ -19,7 +19,7 @@
             android:layout_height="match_parent"
             android:background="@drawable/background_colaps"
             android:fitsSystemWindows="true"
-            app:contentScrim="@color/splash_screen"
+            app:contentScrim="@color/app_bar"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
             app:title="Result">
 
