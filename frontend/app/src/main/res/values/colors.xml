@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#F1EFEF</color>
     <color name="splash_screen">#B7D1E9</color>
+    <color name="app_bar">#B7D1E9</color>
     <color name="camera">#006BCD</color>
     <color name="detail_result">#1f4068</color>
     <color name="detail_result2">#707070</color>
