@@ -32,10 +32,10 @@ class ResultActivity : AppCompatActivity() {
 
 
         if (extras != null) {
-            if (confidenceToFloat >= 0.7){
+            if (confidenceToFloat > 0.69){
                 result(true)
                 when (disease) {
-                    "Acne and Rosacea" -> {
+                    "Acne and Rosacea" -> { // aman
                         FirebaseFirestore.getInstance().collection("disease").document("acne").get()
                             .addOnSuccessListener {
                                 binding.titleDetail.text = it.getString("title")
@@ -45,9 +45,10 @@ class ResultActivity : AppCompatActivity() {
                                 binding.treatment.text = it.getString("treatments")
 
                             }
+                        binding.confidence.text = confidence
                         Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
                     }
-                    "Actinic Keratosis Basal Cell Carcinoma and other Malignant Lesions" -> {
+                    "Actinic Keratosis" -> { // aman
                         FirebaseFirestore.getInstance().collection("disease").document("actinic").get()
                             .addOnSuccessListener {
                                 binding.titleDetail.text = it.getString("title")
@@ -56,9 +57,10 @@ class ResultActivity : AppCompatActivity() {
                                 binding.content.text = it.getString("symptoms")
                                 binding.treatment.text = it.getString("treatments")
                             }
+                        binding.confidence.text = confidence
                         Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
                     }
-                    "Light Diseases and Disorders of Pigmentation" -> {
+                    "Light Diseases and Disorders of Pigmentation" -> { // aman
                         FirebaseFirestore.getInstance().collection("disease")
                             .document("Pigmentationdisorder").get().addOnSuccessListener {
                                 binding.titleDetail.text = it.getString("title")
@@ -67,9 +69,10 @@ class ResultActivity : AppCompatActivity() {
                                 binding.content.text = it.getString("symptoms")
                                 binding.treatment.text = it.getString("treatments")
                             }
+                        binding.confidence.text = confidence
                         Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
                     }
-                    "Nail Fungus and other Nail Disease" -> {
+                    "Nail Fungus and other Nail Disease" -> { // aman
                         FirebaseFirestore.getInstance().collection("disease").document("nailfungus").get()
                             .addOnSuccessListener {
                                 binding.titleDetail.text = it.getString("title")
@@ -78,9 +81,10 @@ class ResultActivity : AppCompatActivity() {
                                 binding.content.text = it.getString("symptoms")
                                 binding.treatment.text = it.getString("treatments")
                             }
+                        binding.confidence.text = confidence
                         Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
                     }
-                    "Eczema Photos" -> {
+                    "Eczema" -> { // Aman
                         FirebaseFirestore.getInstance().collection("disease").document("eczema").get()
                             .addOnSuccessListener {
                                 binding.titleDetail.text = it.getString("title")
@@ -89,6 +93,7 @@ class ResultActivity : AppCompatActivity() {
                                 binding.content.text = it.getString("symptoms")
                                 binding.treatment.text = it.getString("treatments")
                             }
+                        binding.confidence.text = confidence
                         Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
                     }
                 }
