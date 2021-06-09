@@ -30,14 +30,16 @@ class DetailActivity : AppCompatActivity() {
             val contentDetailLatestInfo = extras.getString(content)
             val contentDetailArticle = extras.getString(content)
             val contentDetailTreatment = extras.getString(content)
-            if (contentDetailLatestInfo == "latestInfo") {
-                showDetailLatestInfo(detailLatestInfo)
-            } else if (contentDetailArticle == "article") {
-                showDetailArticle(detailArticle)
-            } else if (contentDetailTreatment == "treatment") {
-                showDetailTreatment(detailTreatment)
-            } else {
-                Toast.makeText(this,"Nothing detail content founded",Toast.LENGTH_SHORT).show()
+            when {
+                contentDetailLatestInfo == "latestInfo" -> {
+                    showDetailLatestInfo(detailLatestInfo)
+                }
+                contentDetailArticle == "article" -> {
+                    showDetailArticle(detailArticle)
+                }
+                contentDetailTreatment == "treatment" -> {
+                    showDetailTreatment(detailTreatment)
+                }
             }
 
         }
@@ -89,14 +91,17 @@ class DetailActivity : AppCompatActivity() {
                         .error(R.drawable.ic_broken)
                 ).into(it.ivDetail)
 
-            it.titleDetail.text = detailLatestInfo?.title
-            it.authorDetail.text = detailLatestInfo?.author
-            it.dateDetail.text = detailLatestInfo?.publishedAt
-            it.desc.text = detailLatestInfo?.description
-            it.content.text = detailLatestInfo?.content
+            it.titleDetail.text = checkNullOrEmptyString(detailLatestInfo?.title)
+            it.authorDetail.text = checkNullOrEmptyString(detailLatestInfo?.author)
+            it.dateDetail.text = checkNullOrEmptyString(detailLatestInfo?.publishedAt)
+            it.desc.text = checkNullOrEmptyString(detailLatestInfo?.description)
+            it.content.text = checkNullOrEmptyString(detailLatestInfo?.content)
             it.titleTreatment.visibility = View.GONE
         }
     }
+
+    private fun checkNullOrEmptyString(text: String?): String =
+        if (text.isNullOrBlank() || text == "null") " - " else text
 
 
     companion object{

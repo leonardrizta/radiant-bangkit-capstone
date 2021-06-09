@@ -1,33 +1,29 @@
 package com.c314.radiantprojects.core.ui.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.c314.radiantprojects.R
 import com.c314.radiantprojects.core.data.source.firebase.Articles
-import com.c314.radiantprojects.core.domain.model.LatestInfoDomain
 import com.c314.radiantprojects.databinding.ItemListArticlesBinding
 
 
-class ArticlesAdapter()
-    : RecyclerView.Adapter<ArticlesAdapter.ArticlesViewHolder>()  {
+class ArticlesAdapter : RecyclerView.Adapter<ArticlesAdapter.ArticlesViewHolder>() {
 
     private lateinit var onItemClickCallback: OnItemClickCallback
     private var dataList = mutableListOf<Articles>()
 
 
-    fun setListData(data:MutableList<Articles>?){
+    fun setListData(data: MutableList<Articles>?) {
         if (data != null) {
             dataList = data
         }
     }
 
-    inner class ArticlesViewHolder(private val binding: ItemListArticlesBinding)
-        : RecyclerView.ViewHolder(binding.root) {
+    inner class ArticlesViewHolder(private val binding: ItemListArticlesBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Articles) {
             binding.apply {
                 Glide.with(itemView.context)

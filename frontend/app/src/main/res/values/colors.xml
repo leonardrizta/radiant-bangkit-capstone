@@ -10,5 +10,9 @@
     <color name="grey">#F1EFEF</color>
     <color name="splash_screen">#B7D1E9</color>
     <color name="camera">#006BCD</color>
+    <color name="detail_result">#1f4068</color>
+    <color name="detail_result2">#707070</color>
+    <color name="detail_result3">#9a9a9a</color>
+    <color name="detail_result4">#162447</color>
 
 </resources>

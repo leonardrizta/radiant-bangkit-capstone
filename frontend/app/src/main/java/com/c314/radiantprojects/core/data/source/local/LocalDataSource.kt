@@ -9,7 +9,8 @@ class LocalDataSource(private val mAppDao: AppDao) {
     fun getLatestInfo(): Flow<List<LatestInfoEntity>> = mAppDao.getLatestInfo()
 
 
-    suspend fun insertLatestInfo(latestInfo: List<LatestInfoEntity>) = mAppDao.insertLatestInfo(latestInfo)
+    suspend fun insertLatestInfo(latestInfo: List<LatestInfoEntity>) =
+        mAppDao.insertLatestInfo(latestInfo)
 
 
 }

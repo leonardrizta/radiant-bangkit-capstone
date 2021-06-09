@@ -14,7 +14,6 @@ import kotlinx.coroutines.flow.map
 class DataRepository (
     private val remoteDataSource: RemoteDataSource,
     private val localDataSource: LocalDataSource,
-//    private val appExecutors: AppExecutors
 ) : IDataRepository {
 
     override fun getLatestInfo(): Flow<Resource<List<LatestInfoDomain>>> =

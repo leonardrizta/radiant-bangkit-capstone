@@ -1,6 +1,7 @@
 package com.c314.radiantprojects.core.data.source.local.entity
 
 import android.os.Parcelable
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -10,6 +11,7 @@ import androidx.room.PrimaryKey
 data class LatestInfoEntity(
 
     @PrimaryKey(autoGenerate = true)
+    @NonNull
     @ColumnInfo(name="id")
     var id : Int = 0,
 

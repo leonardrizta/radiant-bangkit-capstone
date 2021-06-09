@@ -50,6 +50,8 @@
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/result"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -66,7 +68,28 @@
                 tools:text="@tools:sample/lorem" />
 
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title_confidence"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title_detail"
+                android:text="Confidence :" />
 
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/confidence"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@id/title_confidence"
+                app:layout_constraintTop_toBottomOf="@+id/title_detail"
+                tools:text="99%" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/title_desc"
@@ -77,7 +100,7 @@
                 android:text="Description"
                 android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_detail" />
+                app:layout_constraintTop_toBottomOf="@id/title_confidence" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/desc"
@@ -142,5 +165,10 @@
 
     </androidx.core.widget.NestedScrollView>
 
+    <include
+        android:id="@+id/no_result"
+        layout="@layout/no_result"
+        tools:visibility="gone"
+        />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

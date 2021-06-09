@@ -42,14 +42,14 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
+private const val GALLERY_REQUEST_CODE = 2
+private const val REQUEST_IMAGE_CAPTURE = 3
 class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
     private lateinit var binding: ActivityCameraBinding
 
     private var selectedImageUri: Uri? = null
     private var selectedImageBitmap: Bitmap? = null
-    private val CAMERA_REQUEST_CODE = 1
-    private val GALLERY_REQUEST_CODE = 2
-    private val REQUEST_IMAGE_CAPTURE = 3
+
     private val mConfig = ApiConfig
     private lateinit var currentPhotoPath: String
 
@@ -181,14 +181,13 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
     @Throws(IOException::class)
     private fun createImageFile(): File {
         // Create an image file name
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val timeStamp: String = SimpleDateFormat("yyyyMMdd",Locale.getDefault()).format(Date())
         val storageDir: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile(
-            "JPEG_${timeStamp}_", /* prefix */
-            ".jpg", /* suffix */
-            storageDir /* directory */
+            "JPEG_${timeStamp}_",
+            ".jpg",
+            storageDir
         ).apply {
-            // Save a file: path for use with ACTION_VIEW intents
             currentPhotoPath = absolutePath
         }
     }
@@ -199,13 +198,6 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
 
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
-                CAMERA_REQUEST_CODE -> {
-                    val bitmap = data?.extras?.get("data") as Bitmap
-                    binding.imageView.load(bitmap) {
-                        crossfade(true)
-                        crossfade(1000)
-                    }
-                }
                 GALLERY_REQUEST_CODE -> {
                     selectedImageUri = data?.data
                     binding.imageView.load(selectedImageUri) {
@@ -239,7 +231,6 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
             val outputStream = FileOutputStream(file)
             inputStream.copyTo(outputStream)
 
-            Log.d("file",file.toString())
 
             binding.progressBar.progress = 0
             val body = UploadRequestBody(file, "image", this)
@@ -267,18 +258,17 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
                 ) {
                     response.body()?.let {
                         binding.camera.snackbar(it.message)
-                        Log.d("Gallery", response.body().toString())
-                        Log.d("Gallery", response.code().toString())
-                        Log.d("Gallery", response.message())
                         binding.progressBar.progress = 100
 
                         val diseasePrediction = response.body()!!.result.prediction
+                        val diseaseConfidence = response.body()!!.result.confidence
                         if (response.code() == 200) {
                             val intent =
                                 Intent(this@CameraActivity, ResultActivity::class.java).apply {
                                     putExtra(ResultActivity.disease, diseasePrediction)
                                     putExtra(ResultActivity.image,selectedImageUri.toString())
                                     putExtra(ResultActivity.file,file.toString())
+                                    putExtra(ResultActivity.confidence,diseaseConfidence)
                                 }
                             startActivity(intent)
                         }
@@ -318,37 +308,6 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
     }
 
 
-//    // Method to save an bitmap to a file
-//    private fun bitmapToFile(bitmap: Bitmap): Uri {
-//        // Get the context wrapper
-//        val wrapper = ContextWrapper(applicationContext)
-//
-//        // Initialize a new file instance to save bitmap object
-//        var file = wrapper.getDir("Images", Context.MODE_PRIVATE)
-//        file = File(file, "${UUID.randomUUID()}.jpg")
-//
-//        try {
-//            // Compress the bitmap and save in jpg format
-//            val stream: OutputStream = FileOutputStream(file)
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-//            stream.flush()
-//            stream.close()
-//        } catch (e: IOException) {
-//            e.printStackTrace()
-//        }
-//
-//        // Return the saved bitmap uri
-//        return Uri.parse(file.absolutePath)
-//    }
-
-
-//    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
-//        val bytes = ByteArrayOutputStream()
-//        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
-//        val path =
-//            MediaStore.Images.Media.insertImage(inContext.contentResolver, inImage, "Title", null)
-//        return Uri.parse(path)
-//    }
 
 }
 

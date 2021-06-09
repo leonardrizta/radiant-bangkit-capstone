@@ -2,14 +2,11 @@ package com.c314.radiantprojects.core.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.c314.radiantprojects.R
-import com.c314.radiantprojects.core.data.source.firebase.Articles
 import com.c314.radiantprojects.core.data.source.firebase.Disease
-import com.c314.radiantprojects.core.domain.model.LatestInfoDomain
 import com.c314.radiantprojects.databinding.GridLayoutBinding
 
 class MedicineAdapter : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>() {
@@ -18,13 +15,13 @@ class MedicineAdapter : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>
     private var dataList = mutableListOf<Disease>()
 
 
-    fun setListData(data:MutableList<Disease>?){
+    fun setListData(data: MutableList<Disease>?) {
         if (data != null) {
             dataList = data
         }
     }
 
-    inner class MedicineViewHolder(private val binding:  GridLayoutBinding) :
+    inner class MedicineViewHolder(private val binding: GridLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(disease: Disease) {
             binding.apply {
@@ -56,7 +53,8 @@ class MedicineAdapter : RecyclerView.Adapter<MedicineAdapter.MedicineViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MedicineViewHolder {
-        val gridLayoutBinding = GridLayoutBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val gridLayoutBinding =
+            GridLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MedicineViewHolder(gridLayoutBinding)
     }
 

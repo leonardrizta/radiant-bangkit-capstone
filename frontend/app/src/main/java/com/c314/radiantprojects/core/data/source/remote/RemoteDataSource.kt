@@ -1,7 +1,6 @@
 package com.c314.radiantprojects.core.data.source.remote
 
 
-
 import com.c314.radiantprojects.BuildConfig
 import com.c314.radiantprojects.core.data.source.remote.api.ApiResponse
 import com.c314.radiantprojects.core.data.source.remote.response.LatestInfo
@@ -13,7 +12,6 @@ import kotlinx.coroutines.flow.flowOn
 
 class RemoteDataSource(private val apiService: ApiService) {
     private val apiKey = BuildConfig.LATEST_INFO_API_KEY
-
 
     suspend fun getLatestInfo(): Flow<ApiResponse<List<LatestInfo>>> {
         return flow {

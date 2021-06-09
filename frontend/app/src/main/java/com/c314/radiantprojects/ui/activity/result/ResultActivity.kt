@@ -2,11 +2,13 @@ package com.c314.radiantprojects.ui.activity.result
 
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.c314.radiantprojects.databinding.ActivityResultBinding
 import com.google.firebase.firestore.FirebaseFirestore
 import java.io.File
+import java.math.BigDecimal
 
 
 class ResultActivity : AppCompatActivity() {
@@ -20,71 +22,95 @@ class ResultActivity : AppCompatActivity() {
         val disease = extras?.getString("disease")
         val image = extras?.getString("image")
         val file = extras?.getString("file")
-        val fileUri = Uri.parse(image)
+        val confidence = extras?.getString("confidence")
+
+        val confidenceToBigDecimal = BigDecimal(confidence?.trim()?.replace("%", "")).divide(BigDecimal.valueOf(100))
+        val confidenceToFloat = confidenceToBigDecimal.toFloat()
+
         val fileThis = File(file)
 
 
 
         if (extras != null) {
-            if (disease == "Acne and Rosacea Photos") {
-                FirebaseFirestore.getInstance().collection("disease").document("acne").get()
-                    .addOnSuccessListener {
-                        binding.titleDetail.text = it.getString("title")
-                        binding.desc.text = it.getString("description")
-                        binding.titleContent.text = "Symptoms"
-                        binding.content.text = it.getString("symptoms")
-                        binding.treatment.text = it.getString("treatments")
+            if (confidenceToFloat >= 0.7){
+                result(true)
+                when (disease) {
+                    "Acne and Rosacea" -> {
+                        FirebaseFirestore.getInstance().collection("disease").document("acne").get()
+                            .addOnSuccessListener {
+                                binding.titleDetail.text = it.getString("title")
+                                binding.desc.text = it.getString("description")
+                                binding.titleContent.text = "Symptoms"
+                                binding.content.text = it.getString("symptoms")
+                                binding.treatment.text = it.getString("treatments")
 
+                            }
+                        Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
                     }
-//                binding.ivDetail.setImageURI(fileUri)
-                Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
-            } else if (disease == "Actinic Keratosis Basal Cell Carcinoma and other Malignant Lesions") {
-                FirebaseFirestore.getInstance().collection("disease").document("actinic").get()
-                    .addOnSuccessListener {
-                        binding.titleDetail.text = it.getString("title")
-                        binding.desc.text = it.getString("description")
-                        binding.titleContent.text = "Symptoms"
-                        binding.content.text = it.getString("symptoms")
-                        binding.treatment.text = it.getString("treatments")
+                    "Actinic Keratosis Basal Cell Carcinoma and other Malignant Lesions" -> {
+                        FirebaseFirestore.getInstance().collection("disease").document("actinic").get()
+                            .addOnSuccessListener {
+                                binding.titleDetail.text = it.getString("title")
+                                binding.desc.text = it.getString("description")
+                                binding.titleContent.text = "Symptoms"
+                                binding.content.text = it.getString("symptoms")
+                                binding.treatment.text = it.getString("treatments")
+                            }
+                        Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
                     }
-//                binding.ivDetail.setImageURI(fileUri)
-                Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
-            } else if (disease == "Light Diseases and Disorders of Pigmentation") {
-                FirebaseFirestore.getInstance().collection("disease")
-                    .document("Pigmentationdisorder").get().addOnSuccessListener {
-                    binding.titleDetail.text = it.getString("title")
-                    binding.desc.text = it.getString("description")
-                    binding.titleContent.text = "Symptoms"
-                    binding.content.text = it.getString("symptoms")
-                    binding.treatment.text = it.getString("treatments")
+                    "Light Diseases and Disorders of Pigmentation" -> {
+                        FirebaseFirestore.getInstance().collection("disease")
+                            .document("Pigmentationdisorder").get().addOnSuccessListener {
+                                binding.titleDetail.text = it.getString("title")
+                                binding.desc.text = it.getString("description")
+                                binding.titleContent.text = "Symptoms"
+                                binding.content.text = it.getString("symptoms")
+                                binding.treatment.text = it.getString("treatments")
+                            }
+                        Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
+                    }
+                    "Nail Fungus and other Nail Disease" -> {
+                        FirebaseFirestore.getInstance().collection("disease").document("nailfungus").get()
+                            .addOnSuccessListener {
+                                binding.titleDetail.text = it.getString("title")
+                                binding.desc.text = it.getString("description")
+                                binding.titleContent.text = "Symptoms"
+                                binding.content.text = it.getString("symptoms")
+                                binding.treatment.text = it.getString("treatments")
+                            }
+                        Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
+                    }
+                    "Eczema Photos" -> {
+                        FirebaseFirestore.getInstance().collection("disease").document("eczema").get()
+                            .addOnSuccessListener {
+                                binding.titleDetail.text = it.getString("title")
+                                binding.desc.text = it.getString("description")
+                                binding.titleContent.text = "Symptoms"
+                                binding.content.text = it.getString("symptoms")
+                                binding.treatment.text = it.getString("treatments")
+                            }
+                        Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
+                    }
                 }
-//                binding.ivDetail.setImageURI(fileUri)
-                Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
-            } else if (disease == "Nail Fungus and other Nail Disease") {
-                FirebaseFirestore.getInstance().collection("disease").document("nailfungus").get()
-                    .addOnSuccessListener {
-                        binding.titleDetail.text = it.getString("title")
-                        binding.desc.text = it.getString("description")
-                        binding.titleContent.text = "Symptoms"
-                        binding.content.text = it.getString("symptoms")
-                        binding.treatment.text = it.getString("treatments")
-                    }
-//                binding.ivDetail.setImageURI(fileUri)
-                Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
-            } else if (disease == "Eczema Photos") {
-                FirebaseFirestore.getInstance().collection("disease").document("eczema").get()
-                    .addOnSuccessListener {
-                        binding.titleDetail.text = it.getString("title")
-                        binding.desc.text = it.getString("description")
-                        binding.titleContent.text = "Symptoms"
-                        binding.content.text = it.getString("symptoms")
-                        binding.treatment.text = it.getString("treatments")
-                    }
-                Glide.with(applicationContext).load(fileThis).into(binding.ivDetail)
+            } else {
+                result(false)
             }
+
 
         }
 
+    }
+
+    private fun result(state : Boolean){
+        if(state){
+            binding.noResult.lottieAnimNotFound.visibility = View.GONE
+            binding.result.visibility = View.VISIBLE
+            binding.noResult.tvNotFound.visibility = View.GONE
+        } else {
+            binding.noResult.lottieAnimNotFound.visibility = View.VISIBLE
+            binding.result.visibility = View.GONE
+            binding.noResult.tvNotFound.visibility = View.VISIBLE
+        }
     }
 
 
@@ -92,6 +118,7 @@ class ResultActivity : AppCompatActivity() {
         const val disease = "disease"
         const val image = "image"
         const val file = "file"
+        const val confidence = "confidence"
     }
 
 
