@@ -41,9 +41,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-private const val GALLERY_REQUEST_CODE = 2
-private const val REQUEST_IMAGE_CAPTURE = 3
-
 class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
     private lateinit var binding: ActivityCameraBinding
 
@@ -117,9 +114,12 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
     }
 
     private fun gallery() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = resources.getString(R.string.image_type)
-        startActivityForResult(intent, GALLERY_REQUEST_CODE)
+        Intent(Intent.ACTION_PICK).also {
+            it.type = resources.getString(R.string.image_type)
+            val mimeTypes = arrayOf("image/jpeg", "image/png")
+            it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+            startActivityForResult(it, GALLERY_REQUEST_CODE)
+        }
     }
 
 
@@ -152,7 +152,6 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
     }
 
     private fun camera() {
-
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(packageManager)
             val photoFile = createImageFile()
@@ -295,6 +294,11 @@ class CameraActivity : AppCompatActivity(), UploadRequestBody.UploadCallback {
 
     override fun onProgressUpdate(percentage: Int) {
         binding.progressBar.progress = percentage
+    }
+
+    companion object {
+        private const val GALLERY_REQUEST_CODE = 2
+        private const val REQUEST_IMAGE_CAPTURE = 3
     }
 
 
